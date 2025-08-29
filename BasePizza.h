@@ -10,6 +10,7 @@ class BasePizza : public Pizza{
     public:
         double getPrice() override;
         std::string getName() override;
+        void printPizza() override;
 };
 
 #endif
