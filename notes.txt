@@ -1,0 +1,5 @@
+I gave the topping class the property of "Leaf". It indicates that it has no subclasses within the UML Class Diagram context.
+- "It's a classification that signifies a class at the end of an inheritance chain, meaning you cannot create further derived classes from it."
+
+I set the aggregation of the toppings member variable to shared because it represents a weak "whole-part" relationship (has-a relationship).
+- This means that the part can exist independently of the whole.
