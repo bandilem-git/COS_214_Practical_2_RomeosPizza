@@ -1,0 +1,6 @@
+#ifndef DISCOUNTSTRATEGY_H
+#define DISCOUNTSTRATEGY_H
+
+
+
+#endif
