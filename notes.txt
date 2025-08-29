@@ -3,3 +3,5 @@ I gave the topping class the property of "Leaf". It indicates that it has no sub
 
 I set the aggregation of the toppings member variable to shared because it represents a weak "whole-part" relationship (has-a relationship).
 - This means that the part can exist independently of the whole.
+
+(in the ToppingGroup i made it a vector instead of an array so can you change it from toppings : PizzaComponent* to toppings : vector<PizzaComponent> makes memory management easier in the long term)
