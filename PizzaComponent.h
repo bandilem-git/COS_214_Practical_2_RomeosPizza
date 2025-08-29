@@ -1,0 +1,5 @@
+#ifndef PIZZACOMPONENT_H
+#define PIZZACOMPONENT_H
+
+
+#endif
