@@ -6,10 +6,12 @@
 
 class ToppingGroup: public PizzaComponent{
     private:
-        std::vector<PizzaComponent> toppings; // no more * arrays
+        std::vector<PizzaComponent*> toppings; // no more * arrays
 
     public:
-        void add(PizzaComponent component);
+        void add(PizzaComponent* component);
+        std::string getName() override;
+        double getPrice() override;
 
 };
 

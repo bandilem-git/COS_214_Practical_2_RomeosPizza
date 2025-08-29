@@ -5,6 +5,8 @@
 class Topping: public PizzaComponent{
     public:
         Topping(std::string name, double price);
+        std::string getName() override;
+        double getPrice() override;
 };
 
 
