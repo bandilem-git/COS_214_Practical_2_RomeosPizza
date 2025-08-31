@@ -3,3 +3,4 @@ tmp/
 .lock
 *.vpp.*
 testComposite.cpp
+*.o
