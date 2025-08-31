@@ -7,8 +7,10 @@
 class ToppingGroup: public PizzaComponent{
     private:
         std::vector<PizzaComponent*> toppings; // no more * arrays
-
+        std::string name;
+        double price;
     public:
+        ToppingGroup(std::string name, double price);
         void add(PizzaComponent* component);
         std::string getName() override;
         double getPrice() override;
