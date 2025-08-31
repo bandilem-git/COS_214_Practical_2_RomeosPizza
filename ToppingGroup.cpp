@@ -14,7 +14,7 @@ std::string ToppingGroup::getName() {
         os << toppings[i]->getName();
         if (i < (int)toppings.size() - 1) os << ", ";
     }
-    os << ")";
+    os << ") ";
     return os.str();
 }
 
