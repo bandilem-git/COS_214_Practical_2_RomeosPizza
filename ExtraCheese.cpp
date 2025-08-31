@@ -8,3 +8,10 @@ double ExtraCheese::getPrice(){
 std::string ExtraCheese::getName(){
     return PizzaDecorator::getName() + " with extra cheese";
 }
+
+
+void ExtraCheese::printPizza() {
+    std::cout << getName() << " : R" << getPrice() << std::endl;
+}
+
+ExtraCheese::ExtraCheese(Pizza* p): PizzaDecorator(p){}

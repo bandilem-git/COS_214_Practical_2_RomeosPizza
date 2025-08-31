@@ -8,3 +8,10 @@ std::string StuffedCrust::getName(){
 double StuffedCrust::getPrice(){
     return PizzaDecorator::getPrice()+ 6;
 }
+
+
+void StuffedCrust::printPizza() {
+    std::cout << getName() << " : R" << getPrice() << std::endl;
+}
+
+StuffedCrust::StuffedCrust(Pizza* p):PizzaDecorator(p){};

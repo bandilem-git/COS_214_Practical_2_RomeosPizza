@@ -5,6 +5,7 @@
 
 class ExtraCheese: public PizzaDecorator{
     public:
+    ExtraCheese(Pizza* p);
     double getPrice() override;
     std::string getName() override;
     void printPizza() override;

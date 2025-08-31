@@ -2,13 +2,18 @@
 #define PIZZADECORATOR_H
 
 #include "Pizza.h"
-class PizzaDecorator: public Pizza{
-    private:
-        Pizza* pizza;
-    public:
-        virtual double getPrice() = 0;
-        virtual std::string getName()= 0;
-    };
 
+class PizzaDecorator : public Pizza {
+protected:
+    Pizza* pizza;    
+
+public:
+    PizzaDecorator(Pizza* p);
+    virtual ~PizzaDecorator();
+
+    virtual double getPrice();          
+    virtual std::string getName();      
+    virtual void printPizza();          
+};
 
 #endif

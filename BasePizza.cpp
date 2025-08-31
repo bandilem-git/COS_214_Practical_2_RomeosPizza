@@ -10,18 +10,21 @@ BasePizza::~BasePizza(){
     }
 }
 
-double BasePizza::getPrice(){
+double BasePizza::getPrice() {
     double temp = Pizza::getPrice();
-
-    if(toppings->isEmpty()){
-        return temp;
-    }
+    if(toppings)
+        temp += toppings->getPrice(); 
     return temp;
 }
-std::string BasePizza::getName(){
-    std::string toRet = BasePizza::getName()+" (" +toppings->getName()+")";
-    return toRet;
+
+
+std::string BasePizza::getName() {
+    if (toppings && !toppings->isEmpty())
+        return Pizza::getName() + " (" + toppings->getName() + ")";
+    return Pizza::getName();
 }
-void BasePizza::printPizza(){
-    cout << getName()<<std::endl;
+
+void BasePizza::printPizza() {
+    std::cout << getName() << " : R" << getPrice() << std::endl;
 }
+

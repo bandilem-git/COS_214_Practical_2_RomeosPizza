@@ -6,3 +6,4 @@ testComposite.cpp
 *.o
 main
 testDecorator.cpp
+testDecorator

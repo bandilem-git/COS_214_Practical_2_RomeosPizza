@@ -12,6 +12,7 @@ class Pizza{
     double price;
     public:
         Pizza(std::string name, double price);
+        virtual ~Pizza();
         virtual double getPrice();
         virtual std::string getName();
         virtual void printPizza();

@@ -10,7 +10,6 @@ std::string Pizza::getName(){
     return name;
 }
 
-void Pizza::printPizza(){
-   std::cout << "Base class Pizza"<< std::endl;
-}
+void Pizza::printPizza(){}
 
+Pizza::~Pizza(){}
