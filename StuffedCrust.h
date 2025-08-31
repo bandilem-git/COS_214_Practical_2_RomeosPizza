@@ -3,10 +3,12 @@
 
 #include "PizzaDecorator.h"
 
-class StuffedCheese: public PizzaDecorator{
+class StuffedCrust: public PizzaDecorator{
     public:
     double getPrice() override;
     std::string getName() override;
+    void printPizza() override;
+
 };
 
 
