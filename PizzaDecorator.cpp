@@ -1,5 +1,4 @@
 #include "PizzaDecorator.h"
-#include <iostream>
 
 PizzaDecorator::PizzaDecorator(Pizza* p):pizza(p),Pizza(p->getName(), p->getPrice()){};
 
@@ -9,13 +8,13 @@ PizzaDecorator::~PizzaDecorator() {
 }
 
 double PizzaDecorator::getPrice() {
-    return pizza->getPrice();  // delegate
+    return pizza->getPrice();  
 }
 
 std::string PizzaDecorator::getName() {
-    return pizza->getName();   // delegate
+    return pizza->getName();    
 }
 
 void PizzaDecorator::printPizza() {
-    pizza->printPizza();       // delegate
+    pizza->printPizza();        
 }
