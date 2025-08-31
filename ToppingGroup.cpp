@@ -1,7 +1,7 @@
 #include "ToppingGroup.h"
 
 ToppingGroup::ToppingGroup(std::string name, double price)
-    : PizzaComponent(name, price) {}
+    : PizzaComponent(name, price) {} // calls base constructor 
 
 void ToppingGroup::add(PizzaComponent* component) {
     toppings.push_back(component);
@@ -14,12 +14,12 @@ std::string ToppingGroup::getName() {
         os << toppings[i]->getName();
         if (i < (int)toppings.size() - 1) os << ", ";
     }
-    os << ") ";
+    os << ")";
     return os.str();
 }
 
 double ToppingGroup::getPrice() {
-    double total = price;
+    double total = price; //if there is a base price then add base price 
     for (auto* t : toppings) {
         total += t->getPrice();
     }
