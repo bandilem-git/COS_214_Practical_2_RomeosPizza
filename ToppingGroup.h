@@ -16,7 +16,8 @@ public:
     void add(PizzaComponent* component);
     std::string getName() override;
     double getPrice() override;
-
+    bool isEmpty();
+    
     ~ToppingGroup();
 };
 

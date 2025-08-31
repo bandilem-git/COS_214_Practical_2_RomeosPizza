@@ -18,6 +18,11 @@ std::string ToppingGroup::getName() {
     return os.str();
 }
 
+bool ToppingGroup::isEmpty(){
+    return toppings.empty();
+}
+
+
 double ToppingGroup::getPrice() {
     double total = price; //if there is a base price then add base price 
     for (auto* t : toppings) {

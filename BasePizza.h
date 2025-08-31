@@ -3,11 +3,14 @@
 
 #include "Pizza.h"
 #include "PizzaComponent.h"
+#include "ToppingGroup.h"
 #include <vector>
 class BasePizza : public Pizza{
     private:
-        vector<PizzaComponent*> toppings;
+        ToppingGroup* toppings;
     public:
+        BasePizza(std::string name, double price, ToppingGroup* toppings);
+        ~BasePizza();
         double getPrice() override;
         std::string getName() override;
         void printPizza() override;
