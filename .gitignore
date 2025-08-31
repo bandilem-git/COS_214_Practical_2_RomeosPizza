@@ -5,3 +5,4 @@ tmp/
 testComposite.cpp
 *.o
 main
+testDecorator.cpp
