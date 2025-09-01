@@ -27,6 +27,8 @@ int main(){
     // Testing
     // Testing Strategy
     ToppingGroup *toppingroup1 = new ToppingGroup("tomato", 10.50);
+    toppingroup1->add(new Topping("BBQ sauce", 8.7));
+    toppingroup1->add(new Topping("Base",16.99));
     ToppingGroup *toppingroup2 = new ToppingGroup("BBQ", 10.50);
     ToppingGroup *toppingroup3 = new ToppingGroup("BBQ", 10.50);
     ToppingGroup *toppingroup4 = new ToppingGroup("BBQ", 10.50);
