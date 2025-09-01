@@ -144,7 +144,7 @@ int main(){
     pizzaMenu->addPizza(p);
     pizzaMenu->notifyObservers("Brand New Pizza on the menu");
 
-    w1->getStateHistory();
+    
     delete cust1;
     delete w1;
     delete pizzaMenu;

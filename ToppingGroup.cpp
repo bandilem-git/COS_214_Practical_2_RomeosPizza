@@ -10,9 +10,9 @@ void ToppingGroup::add(PizzaComponent* component) {
 std::string ToppingGroup::getName() {
     std::ostringstream os;
     os << name << " (";  //print bracket
-    for (int i = 0; i < toppings.size(); ++i) {
+    for (int i = 0; i < (int)toppings.size(); ++i) {
         os << toppings[i]->getName();
-        if (i != toppings.size() - 1) os << ", ";
+        if (i != (int)toppings.size() - 1) os << ", ";
     }
     os << ")";
     return os.str();
