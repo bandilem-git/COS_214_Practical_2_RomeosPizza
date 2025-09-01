@@ -13,9 +13,6 @@
 #include "BulkDiscount.h"
 #include "FamilyDiscount.h"
 #include "PizzaStateContext.h"
-#include "InOven.h"
-#include "Plated.h"
-#include "Boxed.h"
 #include "PizzaMenu.h"
 #include "Observer.h"
 #include "Website.h"
@@ -95,15 +92,15 @@ std::cout << "\n[State] Ordered → InOven → Plated → Boxed\n";
     stateContext->displayCurrentState();
 
     // Second state: InOven
-    stateContext->setState(new InOven());
+    stateContext->request();
     stateContext->displayCurrentState();
 
     // Third state: Plated
-    stateContext->setState(new Plated());
+    stateContext->request();
     stateContext->displayCurrentState();
 
     // Fourth state: Boxed
-    stateContext->setState(new Boxed());
+    stateContext->request();
     stateContext->displayCurrentState();
 
 
