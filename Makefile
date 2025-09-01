@@ -1,49 +1,21 @@
-# Compiler
+# Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -g
+CXXFLAGS = -std=c++17 -Wall -g -fprofile-arcs -ftest-coverage
+LDFLAGS  = -fprofile-arcs -ftest-coverage
 
 # Target executable
 TARGET = TestingMain
 
-# Automatically find all .cpp files
+# Source and object files
 SRCS := $(wildcard *.cpp)
 OBJS := $(SRCS:.cpp=.o)
 
-# # Source files
-# SOURCES = TestingMain.cpp \
-#           PizzaStateContext.cpp \
-#           InOven.cpp \
-#           Plated.cpp \
-#           Boxed.cpp
-
-# # Object files (automatically generated from source files)
-# OBJECTS = $(SOURCES:.cpp=.o)
-
-# # Header files (for dependency tracking)
-# HEADERS = PizzaStateContext.h \
-#           PizzaState.h \
-#           InOven.h \
-#           Plated.h \
-#           Boxed.h \
-#           Pizza.h
-
-# # Link object files to create executable
-# $(TARGET): $(OBJECTS)
-# 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS)
-
-# # Compile source files to object files
-# %.o: %.cpp $(HEADERS)
-# 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Default build
+# Default target
 all: $(TARGET)
 
-# Shortcut for just 'make'
-make: all
-
-# Compile and link
+# Compile and link executable
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^
 
 # Compile .cpp to .o
 %.o: %.cpp
@@ -53,18 +25,18 @@ $(TARGET): $(OBJS)
 run: $(TARGET)
 	./$(TARGET)
 
-# Run the test
-test: $(TARGET)
-	./$(TARGET)
-
-# Clean object files and executable
-clean:
-	rm -f $(OBJS) $(TARGET)
-
-# Run the executable under valgrind
+# Run the executable under Valgrind
 valgrind: $(TARGET)
 	valgrind --leak-check=full --show-leak-kinds=all ./$(TARGET)
 
-# Run the executable under gdb
-gdb: $(TARGET)
-	gdb $(TARGET)
+# Generate coverage report
+coverage: $(TARGET)
+	@echo "Running tests to generate coverage data..."
+	./$(TARGET)
+	@echo "Generating coverage report..."
+	gcov -o . *.cpp
+	@echo "Coverage report generated (.gcov files)."
+
+# Clean object files, executable, and coverage files
+clean:
+	rm -f $(OBJS) $(TARGET) *.gcda *.gcno *.gcov
