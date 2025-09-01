@@ -21,6 +21,35 @@
 #include "Customer.h"
 #include "Website.h"
 
+BasePizza* BasePizzaGenerator(){// makes the plain pizza with just dough
+    return new BasePizza("Base Pizza ",10.00,nullptr);
+}
+
+Pizza* extraCheesePizza(Pizza* p){
+    return new ExtraCheese(p);
+}
+
+Pizza* deckeredPizza(Pizza* p){
+    return new Decker(p);
+}
+
+Pizza* stuffCrust(Pizza* p){
+    return new StuffedCrust(p);
+}
+
+
 // int main(){
-    
+//     Pizza* base = BasePizzaGenerator();
+//     cout << base->getPrice() <<endl;
+//     base = extraCheesePizza(base);
+//     cout << base->getPrice() <<endl;
+//     // base = deckeredPizza(base);
+//     // cout << base->getPrice() <<endl;
+//     base = stuffCrust(base);
+//     cout << base->getPrice() <<endl;
+
+
+//     cout << base->getName();
+//     delete base;
+//     return 0;
 // }
