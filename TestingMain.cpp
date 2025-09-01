@@ -85,7 +85,7 @@ int main() {
 // ------------------- State Pattern Workflow -------------------
 PizzaStateContext* stateContext = new PizzaStateContext(cheesy);
 
-std::cout << "\n[State] Ordered → InOven → Plated → Boxed\n";
+std::cout << "\n[State] Ordered → InOven → Plated → InOven → Plated → Boxed\n";
 
 // First state: Ordered
     stateContext->setState(new Ordered());
@@ -99,10 +99,18 @@ std::cout << "\n[State] Ordered → InOven → Plated → Boxed\n";
     stateContext->request();
     stateContext->displayCurrentState();
 
-    // Fourth state: Boxed
+    // Fourth state: InOven
+    stateContext->reversePlate();
     stateContext->request();
     stateContext->displayCurrentState();
 
+    // Fifth state: Plated
+    stateContext->request();
+    stateContext->displayCurrentState();
+
+    // Sixth state: Boxed
+    stateContext->request();
+    stateContext->displayCurrentState();
 
     // ------------------- Menu & Observer -------------------
 
@@ -128,7 +136,12 @@ std::cout << "\n[State] Ordered → InOven → Plated → Boxed\n";
     specialMenu->addPizza(stuffed);
     specialMenu->notifyObservers("Stuffed Special special");
     specialMenu->removeAllObservers();    
+    
+    specialMenu->removePizza(stuffed);
+    specialMenu->removePizza(SweetChilli);
 
+    menu->removeAllObservers();
+    menu->removePizza(cheesy);
 
     
     // ------------------- Cleanup -------------------

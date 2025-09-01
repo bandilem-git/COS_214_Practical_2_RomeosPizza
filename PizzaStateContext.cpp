@@ -41,6 +41,10 @@ void PizzaStateContext::displayCurrentState(){
         std::cout << "Pizza is in the Oven" << std::endl;
         break;
 
+    case -2:
+        std::cout << "Pizza has been ordered" << std::endl;
+        break;
+
     default:
         std::cout << "Should never reach here through the states themselves" << std::endl;
         break;

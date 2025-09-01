@@ -1,7 +1,7 @@
 #include "Ordered.h"
 #include "InOven.h"
 
-Ordered::Ordered() : PizzaState(0) {} 
+Ordered::Ordered() : PizzaState(-2) {} 
 
 void Ordered::handle(PizzaStateContext* context){
         std::cout << "Pizza is ordered" << std::endl;
