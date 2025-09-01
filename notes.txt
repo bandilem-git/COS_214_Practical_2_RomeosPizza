@@ -11,3 +11,16 @@ in Menus class, pizzas and observers were made vectors
 The whole composite class works 
 
 PizzaOrder class is the context of the strategy pattern. 
+- It's the client's responsibility to create the appropriate concrete strategy object and pass it to the context. So i put the switching between strategies in the TestingMain
+
+state pattern idea:
+- Pizza can be in 1 of 3 states:
+1. Heating (Sitting in oven)
+- Has oven number
+- Has heated status of 1
+2. Plated(ready to be served)
+- can transition to boxed or be reverted to heating(Maybe customer wants a lil bit of a chared crust)
+- has heated status of 0
+- has heatingplate number
+3. Boxed(Ready to be delivered)
+- cannot be heated (heated status of -1).

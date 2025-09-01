@@ -6,10 +6,12 @@
 class PizzaOrder{
     public:
         PizzaOrder(DiscountStrategy* strategy) : strategy(strategy){};
-        void useAlgorithm();
+        double useAlgorithm(Pizza* pizza){
+            return strategy->applyDiscount(pizza);
+        };
     private:
         DiscountStrategy* strategy;
-        
+
 };
 
 #endif

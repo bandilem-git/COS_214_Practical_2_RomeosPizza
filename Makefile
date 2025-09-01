@@ -9,6 +9,32 @@ TARGET = TestingMain
 SRCS := $(wildcard *.cpp)
 OBJS := $(SRCS:.cpp=.o)
 
+# # Source files
+# SOURCES = TestingMain.cpp \
+#           PizzaStateContext.cpp \
+#           InOven.cpp \
+#           Plated.cpp \
+#           Boxed.cpp
+
+# # Object files (automatically generated from source files)
+# OBJECTS = $(SOURCES:.cpp=.o)
+
+# # Header files (for dependency tracking)
+# HEADERS = PizzaStateContext.h \
+#           PizzaState.h \
+#           InOven.h \
+#           Plated.h \
+#           Boxed.h \
+#           Pizza.h
+
+# # Link object files to create executable
+# $(TARGET): $(OBJECTS)
+# 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS)
+
+# # Compile source files to object files
+# %.o: %.cpp $(HEADERS)
+# 	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 # Default build
 all: $(TARGET)
 
@@ -25,6 +51,10 @@ $(TARGET): $(OBJS)
 
 # Run the executable
 run: $(TARGET)
+	./$(TARGET)
+
+# Run the test
+test: $(TARGET)
 	./$(TARGET)
 
 # Clean object files and executable
