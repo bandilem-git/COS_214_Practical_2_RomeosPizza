@@ -123,6 +123,34 @@ DiscountStrategy* Discount(bool isFamily,int quantity){
     return new RegularPrice();
     
 }
+
+
+
 int main(){
+
+    // Observers
+    Observer* cust1 = new Customer();
+    Observer* w1 = new Website();
+
+    //Subjects
+    Menus* pizzaMenu = new PizzaMenu();
+    Menus* specialtyMenu = new SpecialsMenu();
+
+    //i should be able to delete cust and it should delete menu
+    cust1->setSubject(pizzaMenu);
+    w1->setSubject(pizzaMenu);
+
+    Pizza* p = new BasePizza("Plain",0.0); 
+    pizzaMenu->addPizza(p);
+    pizzaMenu->notifyObservers("Brand New Pizza on the menu");
+
+    w1->getStateHistory();
+    delete cust1;
+    delete w1;
+    delete pizzaMenu;
+    delete specialtyMenu;
+    delete p;
+
+    
     return 0;
 }

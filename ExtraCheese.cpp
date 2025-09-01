@@ -6,7 +6,7 @@ double ExtraCheese::getPrice(){
 }
 
 std::string ExtraCheese::getName(){
-    return pizza->getName() + " with extra cheese";
+    return pizza->getName() + " with extra cheese ";
 }
 
 
