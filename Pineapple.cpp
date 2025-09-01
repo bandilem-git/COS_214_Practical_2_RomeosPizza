@@ -3,11 +3,11 @@
 
 
 double Pineapple::getPrice(){
-    return PizzaDecorator::getPrice()+8; 
+    return PizzaDecorator::getPrice() + 8; 
 }
 
 std::string Pineapple::getName(){
-    return PizzaDecorator::getName() + " with Pineapple";
+    return PizzaDecorator::getName() + " with Pineapple ";
 }
 
 void Pineapple::printPizza() {

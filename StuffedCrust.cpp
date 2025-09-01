@@ -2,11 +2,11 @@
 #include "PizzaDecorator.h"
 
 std::string StuffedCrust::getName(){
-    return PizzaDecorator::getName()+ "w/ Stuffed Crust";
+    return pizza->getName()+ "with Stuffed Crust";
 }
 
 double StuffedCrust::getPrice(){
-    return PizzaDecorator::getPrice()+ 6;
+    return pizza->getPrice()+ 20;// add 20 to the price
 }
 
 
