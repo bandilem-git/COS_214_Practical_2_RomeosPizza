@@ -9,6 +9,9 @@ class PizzaOrder{
         double useAlgorithm(Pizza* pizza){
             return strategy->applyDiscount(pizza);
         };
+        ~PizzaOrder(){
+            delete strategy;
+        }
     private:
         DiscountStrategy* strategy;
 

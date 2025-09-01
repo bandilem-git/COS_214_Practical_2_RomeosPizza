@@ -1,156 +1,89 @@
-// For Demo purposes:
-
-//Composite
-#include "Topping.h"
-#include "ToppingGroup.h"
-
-//Decorator
+#include <iostream>
 #include "BasePizza.h"
 #include "StuffedCrust.h"
 #include "ExtraCheese.h"
-#include "Decker.h"
-
-//strategy
+#include "Topping.h"
+#include "ToppingGroup.h"
+#include "PizzaOrder.h"
 #include "RegularPrice.h"
 #include "BulkDiscount.h"
 #include "FamilyDiscount.h"
+#include "PizzaStateContext.h"
+#include "InOven.h"
+#include "Plated.h"
+#include "Boxed.h"
 
-//observer
-#include "PizzaMenu.h"
-#include "SpecialsMenu.h"
-#include "Customer.h"
-#include "Website.h"
+int main() {
+    // -------------------
+    // Composite Pizzas
+    // -------------------
+    ToppingGroup* pepperoniPizza = new ToppingGroup("Meat Lovers", 0);
+    pepperoniPizza->add(new Topping("Salami", 22.0));
+    pepperoniPizza->add(new Topping("Beef Sausage", 25.0));
 
-//Decorator
-BasePizza* BasePizzaGenerator(std::string name){// makes the plain pizza with just dough
-    return new BasePizza(name,0.00);
-}
- 
+    ToppingGroup* veggiePizza = new ToppingGroup("Veggie", 0);
+    veggiePizza->add(new Topping("Mushrooms", 12.0));
+    veggiePizza->add(new Topping("Green Peppers", 10.0));
 
-Pizza* extraCheesePizza(Pizza* p){
-    return new ExtraCheese(p);
-}
+    std::cout << "Meat Lovers Pizza: " 
+              << pepperoniPizza->getName() 
+              << " costs R" << pepperoniPizza->getPrice() << std::endl;
 
-Pizza* deckeredPizza(Pizza* p){
-    return new Decker(p);
-}
+    std::cout << "Veggie Pizza: " 
+              << veggiePizza->getName() 
+              << " costs R" << veggiePizza->getPrice() << std::endl;
 
-Pizza* stuffCrust(Pizza* p){
-    return new StuffedCrust(p);
-}
+    // -------------------
+    // Decorator Pizzas
+    // -------------------
+    Pizza* base = new BasePizza("Plain Pizza", 60.0);
+    Pizza* stuffed = new StuffedCrust(base);
+    Pizza* cheesy = new ExtraCheese(stuffed);
 
-//cOMPOSITE
+    std::cout << "Plain Pizza (Dough, Tomato Sauce, Cheese) with Stuffed Crust and Extra Cheese costs R" 
+              << cheesy->getPrice() << std::endl;
 
-Topping* makeTopping(){
-    cout << "Choose an ingredient: " << endl;
-    cout << "0: Tomato Sauce "<< endl;
-    cout << "1: Cheese "<< endl;
-    cout << "2: Pepperoni"<< endl;
-    cout << "3: Mushrooms"<< endl;
-    cout << "4: Green Peppers"<< endl;
-    cout << "5: Onions"<< endl;
-    cout << "6: Beef Sausage"<< endl;
-    cout << "7: Salami"<< endl;
-    cout << "8: Feta Cheese"<< endl;
-    cout << "9: Olives"<< endl;
- 
-    int c;
-    cin >> c;
-    switch(c){
-        case 0:
-            return new Topping("Tomato Sauce",5.00);
-            break;
-        case 1:
-            return new Topping("Cheese",5.00);
-            break;
-        case 2:
-            return new Topping("Pepperoni",20.00);
-            break;
-        case 3:
-            return new Topping("Mushrooms",12.00);
-            break;
-        case 4:
-            return new Topping("Green Peppers",10.00);
-            break;
-        case 5:
-            return new Topping("Onions",8.00);
-            break;
-        case 6:
-            return new Topping("Beef Sausage",25.00);
-            break;
-        case 7:
-            return new Topping("Salami",22.00);
-            break;
-        case 8:
-            return new Topping("Feta Cheese",18.00);
-            break;
-        case 9:
-            return new Topping("Olives",15.00);
-            break;
-        default:
-        cout << "error"<< endl;
-        exit(1);
-    }
-}
+    // -------------------
+    // Strategy Discounts
+    // -------------------
+    PizzaOrder* order1 = new PizzaOrder(new RegularPrice());
+    std::cout << "Regular: R" << order1->useAlgorithm(cheesy) << std::endl;
 
+    PizzaOrder* order2 = new PizzaOrder(new BulkDiscount());
+    std::cout << "Bulk discount: R" << order2->useAlgorithm(cheesy) << std::endl;
 
-Pizza* addToppings(BasePizza* p, int numOfToppings) {
-    std::cout << "Enter combination name:\n";
-    std::string groupName;
-    std::getline(std::cin >> std::ws, groupName);// emwoves whitespace  
+    PizzaOrder* order3 = new PizzaOrder(new FamilyDiscount());
+    std::cout << "Family discount: R" << order3->useAlgorithm(cheesy) << std::endl;
 
- 
-    ToppingGroup* extraGroup = new ToppingGroup(groupName, 0.0);
+    // -------------------
+    // State Pattern Demo
+    // -------------------
+    PizzaStateContext* context = new PizzaStateContext(cheesy);
+    context->setState(new InOven());
+    context->displayCurrentState();
 
-    for(int i = 0; i < numOfToppings; i++){
-        extraGroup->add(makeTopping());
-    }
+    context->setState(new Plated());
+    context->displayCurrentState();
 
-     p->addToToppings(extraGroup);
+    context->setState(new Boxed());
+    context->displayCurrentState();
 
-    return p;
-}
+    // -------------------
+    // Cleanup Composite
+    // -------------------
+    delete pepperoniPizza;
+    delete veggiePizza;
 
+    // Decorators clean up internally
+    delete cheesy;
 
-//Strategy
-DiscountStrategy* Discount(bool isFamily,int quantity){
-    if(isFamily){
-        return new FamilyDiscount();
-    }
-    else if(quantity > 5){
-        return new BulkDiscount();
-    } 
-    return new RegularPrice();
-    
-}
+    // Cleanup strategies and orders
+    delete order1;
+    delete order2;
+    delete order3;
 
+    // Cleanup state context
+    delete context;
 
-
-int main(){
-
-    // Observers
-    Observer* cust1 = new Customer();
-    Observer* w1 = new Website();
-
-    //Subjects
-    Menus* pizzaMenu = new PizzaMenu();
-    Menus* specialtyMenu = new SpecialsMenu();
-
-    //i should be able to delete cust and it should delete menu
-    cust1->setSubject(pizzaMenu);
-    w1->setSubject(pizzaMenu);
-
-    Pizza* p = new BasePizza("Plain",0.0); 
-    pizzaMenu->addPizza(p);
-    pizzaMenu->notifyObservers("Brand New Pizza on the menu");
-
-    
-    delete cust1;
-    delete w1;
-    delete pizzaMenu;
-    delete specialtyMenu;
-    delete p;
-
-    
     return 0;
 }
