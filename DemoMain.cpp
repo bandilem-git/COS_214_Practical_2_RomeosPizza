@@ -23,8 +23,9 @@
 
 //Decorator
 BasePizza* BasePizzaGenerator(std::string name){// makes the plain pizza with just dough
-    return new BasePizza(name,10.00,nullptr);
+    return new BasePizza(name,0.00);
 }
+ 
 
 Pizza* extraCheesePizza(Pizza* p){
     return new ExtraCheese(p);
@@ -93,31 +94,35 @@ Topping* makeTopping(){
 }
 
 
-Pizza* addToppings(Pizza* p,int numOfToppings){
+Pizza* addToppings(BasePizza* p, int numOfToppings) {
     std::cout << "Enter combination name:\n";
-    string name;
-    std::getline(std::cin,name);
-    ToppingGroup* tGroup= new ToppingGroup(name,0.0);
-    for(int i=0; i < numOfToppings; i++){
-        tGroup->add(makeTopping());
+    std::string groupName;
+    std::getline(std::cin >> std::ws, groupName);// emwoves whitespace  
+
+ 
+    ToppingGroup* extraGroup = new ToppingGroup(groupName, 0.0);
+
+    for(int i = 0; i < numOfToppings; i++){
+        extraGroup->add(makeTopping());
     }
-    string pizzaName = p->getName();
-    int pizzaPrice = p->getPrice();
-    delete p;
-    return new BasePizza(pizzaName,pizzaPrice,tGroup);
+
+     p->addToToppings(extraGroup);
+
+    return p;
 }
 
 
+//Strategy
+DiscountStrategy* Discount(bool isFamily,int quantity){
+    if(isFamily){
+        return new FamilyDiscount();
+    }
+    else if(quantity > 5){
+        return new BulkDiscount();
+    } 
+    return new RegularPrice();
+    
+}
 int main(){
-    Pizza* base = BasePizzaGenerator("order1 ");
-    cout << base->getPrice() <<endl;
-    cout << endl;
-    base = addToppings(base,0);
-    cout << base->getName();
-    cout << base->getPrice() <<endl;
-
-    base = stuffCrust(base);
-    cout << base->getName();
-    delete base;
     return 0;
 }
