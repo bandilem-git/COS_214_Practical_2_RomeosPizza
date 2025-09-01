@@ -15,5 +15,5 @@ void Customer::update(Menus *subject, std::string message){
     }
     
     observerStates.push_back(stateCopy);
-    std::cout << "Customer update:" << message << std::endl;
+    std::cout << "Customer update: " << message << std::endl;
 }

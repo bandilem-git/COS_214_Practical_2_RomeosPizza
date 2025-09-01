@@ -10,9 +10,6 @@ class Customer: public Observer{
     public:
         void update(Menus *subject, std::string message) override;
         ~Customer(){
-            // if(subject){
-            //     subject->removeObserver(this);
-            // }
             clearHistory();
         }
 };

@@ -10,9 +10,6 @@ class Website: public Observer{
     public:
         void update(Menus *subject, std::string message) override;
         ~Website(){
-            // if (subject){
-            //     subject->removeObserver(this);
-            // }
             clearHistory();
         }
 };

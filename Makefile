@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall -g
 
 # Target executable
-TARGET = observertest
+TARGET = TestingMain
 
 # Automatically find all .cpp files
 SRCS := $(wildcard *.cpp)

@@ -9,3 +9,5 @@ I set the aggregation of the toppings member variable to shared because it repre
 in Menus class, pizzas and observers were made vectors
 
 The whole composite class works 
+
+PizzaOrder class is the context of the strategy pattern. 

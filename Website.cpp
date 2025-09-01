@@ -15,5 +15,5 @@ void Website::update(Menus *subject, std::string message){
     }
 
     observerStates.push_back(stateCopy);
-    std::cout << "Website update:" << message << std::endl;
+    std::cout << "Website update: " << message << std::endl;
 }

@@ -27,12 +27,7 @@ class Menus{
 
         virtual ~Menus();
 
-        // // Deleting the copy constructor and assignment to prevent issues
-        // Menus(const Menus&) = delete;
-        // Menus& operator=(const Menus&) = delete;
-    
         protected:
-            void safeNotify(const std::string &message);
             const std::vector<Observer *> &getObservers() const; // only derived classes can access
         private:
         std::vector<Observer*> observers;
