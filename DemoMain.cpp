@@ -21,6 +21,7 @@
 #include "Customer.h"
 #include "Website.h"
 
+//Decorator
 BasePizza* BasePizzaGenerator(){// makes the plain pizza with just dough
     return new BasePizza("Base Pizza ",10.00,nullptr);
 }
