@@ -3,7 +3,7 @@
 
 
 double Decker::getPrice(){
-    return pizza->getPrice() + 9; 
+    return pizza->getPrice() + 39; 
 }
 
 std::string Decker::getName(){

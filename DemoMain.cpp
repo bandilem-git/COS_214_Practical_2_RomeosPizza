@@ -1,5 +1,9 @@
 #include <iostream>
 #include "BasePizza.h"
+#include "Customer.h"
+#include "Decker.h"
+#include "Ordered.h"
+#include "SpecialsMenu.h"
 #include "StuffedCrust.h"
 #include "ExtraCheese.h"
 #include "Topping.h"
@@ -9,70 +13,143 @@
 #include "BulkDiscount.h"
 #include "FamilyDiscount.h"
 #include "PizzaStateContext.h"
-#include "Ordered.h"
 #include "InOven.h"
 #include "Plated.h"
 #include "Boxed.h"
+#include "PizzaMenu.h"
+#include "Observer.h"
+#include "Website.h"
+
 
 int main() {
-    std::cout << "=== Creating Composite Pizzas ===" << std::endl;
-    ToppingGroup* pepperoniPizza = new ToppingGroup("Meat Lovers", 0);
-    pepperoniPizza->add(new Topping("Salami", 22.0));
-    pepperoniPizza->add(new Topping("Beef Sausage", 25.0));
+    std::cout << "=== Romeo's Pizza Full Test ===\n\n";
+
+    // ------------------- Composite Pizzas -------------------
+    ToppingGroup* meatPizza = new ToppingGroup("Meat Lovers", 0);
+    meatPizza->add(new Topping("Salami", 22.0));
+    meatPizza->add(new Topping("Beef Sausage", 25.0));
 
     ToppingGroup* veggiePizza = new ToppingGroup("Veggie", 0);
     veggiePizza->add(new Topping("Mushrooms", 12.0));
     veggiePizza->add(new Topping("Green Peppers", 10.0));
 
-    std::cout << "Meat Lovers Pizza: " << pepperoniPizza->getName() 
-              << " costs R" << pepperoniPizza->getPrice() << std::endl;
-    std::cout << "Veggie Pizza: " << veggiePizza->getName() 
-              << " costs R" << veggiePizza->getPrice() << std::endl;
+    std::cout << meatPizza->getName() << " costs R" << meatPizza->getPrice() << std::endl;
+    std::cout << veggiePizza->getName() << " costs R" << veggiePizza->getPrice() << std::endl;
 
-    std::cout << "\n=== Creating Decorator Pizza ===" << std::endl;
+
+    // ------------------- Decorator Pizzas -------------------
     Pizza* base = new BasePizza("Plain Pizza", 60.0);
+    base->printPizza();
+    cout<< endl;
+
     Pizza* stuffed = new StuffedCrust(base);
+    stuffed->printPizza();
+    cout << endl;
+
     Pizza* cheesy = new ExtraCheese(stuffed);
-    std::cout << cheesy->getName() <<" R" << cheesy->getPrice() << std::endl;
+    cheesy->printPizza();
+    cout << endl;
 
-    std::cout << "\n=== Applying Discount Strategies ===" << std::endl;
-    PizzaOrder* order1 = new PizzaOrder(new RegularPrice());
-    std::cout << "[Strategy] RegularPrice applied: R" << order1->useAlgorithm(cheesy) << std::endl;
+    std::cout << cheesy->getName() << " costs R" << cheesy->getPrice() << std::endl;
 
-    PizzaOrder* order2 = new PizzaOrder(new BulkDiscount());
-    std::cout << "[Strategy] BulkDiscount applied: R" << order2->useAlgorithm(cheesy) << std::endl;
 
-    PizzaOrder* order3 = new PizzaOrder(new FamilyDiscount());
-    std::cout << "[Strategy] FamilyDiscount applied: R" << order3->useAlgorithm(cheesy) << std::endl;
+    // ------------------- Decorator & Composite -------------------
 
-    std::cout << "\n=== State Pattern Demo ===" << std::endl;
-    PizzaStateContext* context = new PizzaStateContext(cheesy);
+    Pizza* SweetChilli = new BasePizza("Sweet Chilli", 20.0);
+    cout << "Base: " << endl;
 
-    std::cout << "[State] Transition to Ordered" << std::endl;
-    context->setState(new Ordered());
-    context->displayCurrentState();
+    SweetChilli->printPizza();
+    cout << "StuffingCrust: " << endl;
 
-    std::cout << "[State] Transition to InOven" << std::endl;
-    context->setState(new InOven());
-    context->displayCurrentState();
+    SweetChilli = new StuffedCrust(SweetChilli);
+    SweetChilli->printPizza();
 
-    std::cout << "[State] Transition to Plated" << std::endl;
-    context->setState(new Plated());
-    context->displayCurrentState();
+     cout << "Adding Meaty toppings: " << endl;
 
-    std::cout << "[State] Transition to Boxed" << std::endl;
-    context->setState(new Boxed());
-    context->displayCurrentState();
+    SweetChilli->addToToppings(meatPizza);
+    SweetChilli->printPizza();
 
-    std::cout << "\n=== Cleaning up ===" << std::endl;
-    delete pepperoniPizza;
+    cout << "Cram Decker Maker: "<< endl;
+
+    SweetChilli = new Decker(SweetChilli);
+    SweetChilli -> printPizza();
+
+
+    // ------------------- Strategy Discounts -------------------
+    cout << "Original price of "<< cheesy->getName() << " R" << cheesy->getPrice()<<endl;
+    PizzaOrder* regularOrder = new PizzaOrder(new RegularPrice());
+    PizzaOrder* bulkOrder    = new PizzaOrder(new BulkDiscount());
+    PizzaOrder* familyOrder  = new PizzaOrder(new FamilyDiscount());
+
+    std::cout << "[Strategy] RegularPrice: R" << regularOrder->useAlgorithm(cheesy) << std::endl;
+    std::cout << "[Strategy] BulkDiscount: R" << bulkOrder->useAlgorithm(cheesy) << std::endl;
+    std::cout << "[Strategy] FamilyDiscount: R" << familyOrder->useAlgorithm(cheesy) << std::endl;
+
+// ------------------- State Pattern Workflow -------------------
+PizzaStateContext* stateContext = new PizzaStateContext(cheesy);
+
+std::cout << "\n[State] Ordered → InOven → Plated → Boxed\n";
+
+// First state: Ordered
+    stateContext->setState(new Ordered());
+    stateContext->displayCurrentState();
+
+    // Second state: InOven
+    stateContext->setState(new InOven());
+    stateContext->displayCurrentState();
+
+    // Third state: Plated
+    stateContext->setState(new Plated());
+    stateContext->displayCurrentState();
+
+    // Fourth state: Boxed
+    stateContext->setState(new Boxed());
+    stateContext->displayCurrentState();
+
+
+    // ------------------- Menu & Observer -------------------
+
+    Menus* menu = new PizzaMenu();
+    Observer* customer1 = new Customer();
+    Observer* customer2 = new Website();
+
+    menu->addObserver(customer1);
+    menu->addObserver(customer2);
+
+    menu->addPizza(cheesy);
+
+    Menus* specialMenu = new SpecialsMenu();
+    Observer* customer3 = new Customer();
+    Observer* customer4 = new Website();
+
+    specialMenu->addObserver(customer3);
+    specialMenu->addObserver(customer4);
+
+    specialMenu->addPizza(SweetChilli);
+    specialMenu->notifyObservers("Sweet Chilli special");
+
+    specialMenu->addPizza(stuffed);
+    specialMenu->notifyObservers("Stuffed Special special");
+    specialMenu->removeAllObservers();    
+
+
+    
+    // ------------------- Cleanup -------------------
+    delete meatPizza;
     delete veggiePizza;
     delete cheesy;
-    delete order1;
-    delete order2;
-    delete order3;
-    delete context;
+    delete regularOrder;
+    delete bulkOrder;
+    delete familyOrder;
+    delete stateContext;
+    delete menu;
+    delete customer1;
+    delete customer2;
+    delete customer3;
+    delete customer4;
+    delete specialMenu;
+    delete SweetChilli;
 
-    std::cout << "Program finished successfully." << std::endl;
+    std::cout << "\nProgram finished successfully.\n";
     return 0;
 }
