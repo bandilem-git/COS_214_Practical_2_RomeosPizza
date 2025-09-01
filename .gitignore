@@ -7,3 +7,4 @@ testComposite.cpp
 main
 testDecorator.cpp
 testDecorator
+observertest.cpp

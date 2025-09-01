@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall -g
 
 # Target executable
-TARGET = testDecorator
+TARGET = observertest
 
 # Automatically find all .cpp files
 SRCS := $(wildcard *.cpp)
@@ -34,3 +34,7 @@ clean:
 # Run the executable under valgrind
 valgrind: $(TARGET)
 	valgrind --leak-check=full --show-leak-kinds=all ./$(TARGET)
+
+# Run the executable under gdb
+gdb: $(TARGET)
+	gdb $(TARGET)
