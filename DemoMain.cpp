@@ -22,8 +22,8 @@
 #include "Website.h"
 
 //Decorator
-BasePizza* BasePizzaGenerator(){// makes the plain pizza with just dough
-    return new BasePizza("Base Pizza ",10.00,nullptr);
+BasePizza* BasePizzaGenerator(std::string name){// makes the plain pizza with just dough
+    return new BasePizza(name,10.00,nullptr);
 }
 
 Pizza* extraCheesePizza(Pizza* p){
@@ -54,7 +54,7 @@ Topping* makeTopping(){
     cout << "9: Olives"<< endl;
  
     int c;
-
+    cin >> c;
     switch(c){
         case 0:
             return new Topping("Tomato Sauce",5.00);
@@ -86,21 +86,38 @@ Topping* makeTopping(){
         case 9:
             return new Topping("Olives",15.00);
             break;
+        default:
+        cout << "error"<< endl;
+        exit(1);
     }
 }
 
-// int main(){
-//     Pizza* base = BasePizzaGenerator();
-//     cout << base->getPrice() <<endl;
-//     base = extraCheesePizza(base);
-//     cout << base->getPrice() <<endl;
-//     // base = deckeredPizza(base);
-//     // cout << base->getPrice() <<endl;
-//     base = stuffCrust(base);
-//     cout << base->getPrice() <<endl;
+
+Pizza* addToppings(Pizza* p,int numOfToppings){
+    std::cout << "Enter combination name:\n";
+    string name;
+    std::getline(std::cin,name);
+    ToppingGroup* tGroup= new ToppingGroup(name,0.0);
+    for(int i=0; i < numOfToppings; i++){
+        tGroup->add(makeTopping());
+    }
+    string pizzaName = p->getName();
+    int pizzaPrice = p->getPrice();
+    delete p;
+    return new BasePizza(pizzaName,pizzaPrice,tGroup);
+}
 
 
-//     cout << base->getName();
-//     delete base;
-//     return 0;
-// }
+int main(){
+    Pizza* base = BasePizzaGenerator("order1 ");
+    cout << base->getPrice() <<endl;
+    cout << endl;
+    base = addToppings(base,0);
+    cout << base->getName();
+    cout << base->getPrice() <<endl;
+
+    base = stuffCrust(base);
+    cout << base->getName();
+    delete base;
+    return 0;
+}
