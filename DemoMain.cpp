@@ -1,23 +1,23 @@
-// #include <iostream>
-// #include <vector>
-// #include <string>
-// #include "BasePizza.h"
-// #include "Customer.h"
-// #include "Decker.h"
-// #include "Ordered.h"
-// #include "SpecialsMenu.h"
-// #include "StuffedCrust.h"
-// #include "ExtraCheese.h"
-// #include "Topping.h"
-// #include "ToppingGroup.h"
-// #include "PizzaOrder.h"
-// #include "RegularPrice.h"
-// #include "BulkDiscount.h"
-// #include "FamilyDiscount.h"
-// #include "PizzaStateContext.h"
-// #include "PizzaMenu.h"
-// #include "Observer.h"
-// #include "Website.h"
+#include <iostream>
+#include <vector>
+#include <string>
+#include "BasePizza.h"
+#include "Customer.h"
+#include "Decker.h"
+#include "Ordered.h"
+#include "SpecialsMenu.h"
+#include "StuffedCrust.h"
+#include "ExtraCheese.h"
+#include "Topping.h"
+#include "ToppingGroup.h"
+#include "PizzaOrder.h"
+#include "RegularPrice.h"
+#include "BulkDiscount.h"
+#include "FamilyDiscount.h"
+#include "PizzaStateContext.h"
+#include "PizzaMenu.h"
+#include "Observer.h"
+#include "Website.h"
 
 
 // std::vector<Pizza*> pizzas;   // global list of pizzas
@@ -116,46 +116,46 @@
 
 //     pizzas.push_back(Meat_Lover);
 
-//     // --- Vegetarian Deluxe ---
-//     BasePizza* Veg_del = new BasePizza("Vegetarian Deluxe", 0.0);
-//     ToppingGroup* vegDel = new ToppingGroup("", 0.0);
-//     vegDel->add(new Topping("Onions", 8.00));
-//     vegDel->add(new Topping("Green Peppers", 10.00));
-//     vegDel->add(new Topping("Mushrooms", 12.00));
-//     Veg_del->addToToppings(vegDel);
-//     ToppingGroup* official_veg_del = new ToppingGroup("Vegetarian Deluxe", 0.0);
-//     official_veg_del->add(new Topping("Feta Cheese", 18.00));
-//     official_veg_del->add(new Topping("Olives", 15.00));
-//     Veg_del->addToToppings(official_veg_del);
-//     pizzas.push_back(Veg_del);
-// }
+    // --- Vegetarian Deluxe ---
+    BasePizza* Veg_del = new BasePizza("Vegetarian Deluxe", 0.0);
+    ToppingGroup* vegDel = new ToppingGroup("", 0.0);
+    vegDel->add(new Topping("Onions", 8.00));
+    vegDel->add(new Topping("Green Peppers", 10.00));
+    vegDel->add(new Topping("Mushrooms", 12.00));
+    Veg_del->addToToppings(vegDel);
+    ToppingGroup* official_veg_del = new ToppingGroup("Vegetarian Deluxe", 0.0);
+    official_veg_del->add(new Topping("Feta Cheese", 18.00));
+    official_veg_del->add(new Topping("Olives", 15.00));
+    Veg_del->addToToppings(official_veg_del);
+    pizzas.push_back(Veg_del);
+}
 
 
-// void applyDiscount() {
-//     if (pizzas.empty()) {
-//         std::cout << "No pizzas available.\n";
-//         return;
-//     }
-//     std::cout << "Choose discount: (1) Family (2) Bulk (3) Regular: ";
-//     int choice;
-//     std::cin >> choice;
+void applyDiscount() {
+    if (pizzas.empty()) {
+        std::cout << "No pizzas available.\n";
+        return;
+    }
+    std::cout << "Choose discount: (1) Family (2) Bulk (3) Regular: ";
+    int choice;
+    std::cin >> choice;
 
-//     DiscountStrategy* strategy = nullptr;
-//     if (choice == 1) strategy = new FamilyDiscount();
-//     else if (choice == 2) strategy = new BulkDiscount();
-//     else strategy = new RegularPrice();
+    DiscountStrategy* strategy = nullptr;
+    if (choice == 1) strategy = new FamilyDiscount();
+    else if (choice == 2) strategy = new BulkDiscount();
+    else strategy = new RegularPrice();
 
-//     PizzaOrder* order = new PizzaOrder(strategy);
+    PizzaOrder* order = new PizzaOrder(strategy);
 
-//     std::cout << "\n=== Discounted Prices ===\n";
-//     for (auto& p : pizzas) {
-//         cout << p->getName()<< " original Price: R"<<p->getPrice()<< endl;
-//         double price = order->useAlgorithm(p);
-//         std::cout << p->getName() << " discounted price: R" << price << "\n";
-//     }
+    std::cout << "\n=== Discounted Prices ===\n";
+    for (auto& p : pizzas) {
+        cout << p->getName()<< " original Price: R"<<p->getPrice()<< endl;
+        double price = order->useAlgorithm(p);
+        std::cout << p->getName() << " discounted price: R" << price << "\n";
+    }
 
-//     delete order;  // cleans strategy internally
-// }
+    delete order;  // cleans strategy internally
+}
 
 // void simulateState() {
 //     if (pizzas.empty()) {
