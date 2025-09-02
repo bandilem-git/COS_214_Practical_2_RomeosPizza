@@ -14,9 +14,6 @@ class Observer{
         virtual ~Observer() = default;
         void setSubject(Menus* s);
         Menus* getSubject()const{return subject;}
-        const std::vector<std::vector<Pizza *>>& getStateHistory() const{
-            return observerStates;
-        }
         void clearHistory(){
             observerStates.clear();
         }

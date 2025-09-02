@@ -10,7 +10,7 @@ class PizzaState{
 public:
     PizzaState(int heatLevel): heat(heatLevel){}
     virtual ~PizzaState(){}
-    virtual void handle(PizzaStateContext*) = 0;
+    virtual void handle(PizzaStateContext*c) = 0;
     int getHeat(){return heat;}
     virtual void reversePlate(){}
 private:

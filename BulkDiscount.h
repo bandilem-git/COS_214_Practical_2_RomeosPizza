@@ -8,6 +8,7 @@ class BulkDiscount : public DiscountStrategy
 {
 public:
     double applyDiscount(Pizza *pizza);
+    double getDiscount() { return discount; }
 
 private:
     double discount = 0.10;

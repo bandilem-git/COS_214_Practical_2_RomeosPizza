@@ -6,7 +6,7 @@
 
 class Ordered : public PizzaState {
 public:
-    Ordered(); // heatLevel 0
+    Ordered(); // heatLevel -2
     void handle(PizzaStateContext* context);
     std::string getName();
 };

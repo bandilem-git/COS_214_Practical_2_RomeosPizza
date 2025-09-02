@@ -7,7 +7,7 @@ class Boxed : public PizzaState{
     public:
     Boxed();
     ~Boxed() {}
-    void handle(PizzaStateContext *);
+    void handle(PizzaStateContext *c);
 };
 
 #endif

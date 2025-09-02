@@ -20,9 +20,6 @@ class Menus{
         std::vector<Pizza*> getState() const;
         void setState(const std::vector<Pizza*>& pizzas);
 
-        size_t getPizzaCount()const{return pizzas.size();}
-        bool isEmpty()const{return pizzas.empty();}
-
         void removeAllObservers();
 
         virtual ~Menus();

@@ -7,6 +7,7 @@
 class DiscountStrategy{
     public:
         virtual double applyDiscount(Pizza*) = 0;
+        virtual double getDiscount()=0;
         virtual ~DiscountStrategy(){};
 };
 

@@ -2,18 +2,22 @@
 #define PIZZAORDER_H
 
 #include "DiscountStrategy.h"
+#include "RegularPrice.h"
+#include "BulkDiscount.h"
+#include "FamilyDiscount.h"
 
 class PizzaOrder{
     public:
-        PizzaOrder(DiscountStrategy* strategy) : strategy(strategy){};
+        PizzaOrder(){};
         double useAlgorithm(Pizza* pizza){
             return strategy->applyDiscount(pizza);
         };
-        ~PizzaOrder(){
-            delete strategy;
-        }
+        void bulkStrategy();
+        void familyStrategy();
+        void regularStrategy();
+        ~PizzaOrder(){delete strategy;}
     private:
-        DiscountStrategy* strategy;
+        DiscountStrategy* strategy = new RegularPrice();
 
 };
 
