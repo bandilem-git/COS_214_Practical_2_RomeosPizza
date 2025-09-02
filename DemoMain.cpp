@@ -11,9 +11,6 @@
 #include "Topping.h"
 #include "ToppingGroup.h"
 #include "PizzaOrder.h"
-#include "RegularPrice.h"
-#include "BulkDiscount.h"
-#include "FamilyDiscount.h"
 #include "PizzaStateContext.h"
 #include "PizzaMenu.h"
 #include "Observer.h"
@@ -130,31 +127,42 @@ void generateGenericPizza() {
     pizzas.push_back(Veg_del);
 }
 
-
 void applyDiscount() {
     if (pizzas.empty()) {
         std::cout << "No pizzas available.\n";
         return;
     }
-    std::cout << "Choose discount: (1) Family (2) Bulk (3) Regular: ";
-    int choice;
-    std::cin >> choice;
 
-    DiscountStrategy* strategy = nullptr;
-    if (choice == 1) strategy = new FamilyDiscount();
-    else if (choice == 2) strategy = new BulkDiscount();
-    else strategy = new RegularPrice();
+    PizzaOrder* order = new PizzaOrder();
 
-    PizzaOrder* order = new PizzaOrder(strategy);
-
-    std::cout << "\n=== Discounted Prices ===\n";
+    // RegularPrice
+    order->regularStrategy();
+    std::cout << "\n=== Regular Price ===\n";
     for (auto& p : pizzas) {
-        cout << p->getName()<< " original Price: R"<<p->getPrice()<< endl;
-        double price = order->useAlgorithm(p);
-        std::cout << p->getName() << " discounted price: R" << price << "\n";
+        std::cout << "[Strategy] RegularPrice: " 
+                  << p->getName() << ": R" 
+                  << order->useAlgorithm(p) << "\n";
     }
 
-    delete order;  // cleans strategy internally
+    // BulkDiscount
+    order->bulkStrategy();
+    std::cout << "\n=== Bulk Discount ===\n";
+    for (auto& p : pizzas) {
+        std::cout << "[Strategy] BulkDiscount: " 
+                  << p->getName() << ": R" 
+                  << order->useAlgorithm(p) << "\n";
+    }
+
+    // FamilyDiscount
+    order->familyStrategy();
+    std::cout << "\n=== Family Discount ===\n";
+    for (auto& p : pizzas) {
+        std::cout << "[Strategy] FamilyDiscount: " 
+                  << p->getName() << ": R" 
+                  << order->useAlgorithm(p) << "\n";
+    }
+
+    delete order; 
 }
 
 void simulateState() {
