@@ -73,21 +73,21 @@ int main() {
 
 
     // ------------------- Strategy Discounts -------------------
-    cout << "Original price of "<< cheesy->getName() << " R" << cheesy->getPrice()<<endl;
+    cout << "Original price of "<< cheesy->getName() << " " << cheesy->getPrice()<<endl;
     PizzaOrder* regularOrder = new PizzaOrder(new RegularPrice());
     PizzaOrder* bulkOrder    = new PizzaOrder(new BulkDiscount());
     PizzaOrder* familyOrder  = new PizzaOrder(new FamilyDiscount());
 
-    std::cout << "[Strategy] RegularPrice: R" << regularOrder->useAlgorithm(cheesy) << std::endl;
-    std::cout << "[Strategy] BulkDiscount: R" << bulkOrder->useAlgorithm(cheesy) << std::endl;
-    std::cout << "[Strategy] FamilyDiscount: R" << familyOrder->useAlgorithm(cheesy) << std::endl;
+    std::cout << "[Strategy] RegularPrice: " << regularOrder->useAlgorithm(cheesy) << std::endl;
+    std::cout << "[Strategy] BulkDiscount: " << bulkOrder->useAlgorithm(cheesy) << std::endl;
+    std::cout << "[Strategy] FamilyDiscount: " << familyOrder->useAlgorithm(cheesy) << std::endl;
 
 // ------------------- State Pattern Workflow -------------------
 PizzaStateContext* stateContext = new PizzaStateContext(cheesy);
 
 std::cout << "\n[State] Ordered → InOven → Plated → InOven → Plated → Boxed\n";
 
-// First state: Ordered
+    // First state: Ordered
     stateContext->setState(new Ordered());
     stateContext->displayCurrentState();
 
@@ -98,9 +98,9 @@ std::cout << "\n[State] Ordered → InOven → Plated → InOven → Plated → 
     // Third state: Plated
     stateContext->request();
     stateContext->displayCurrentState();
+    stateContext->reversePlate();
 
     // Fourth state: InOven
-    stateContext->reversePlate();
     stateContext->request();
     stateContext->displayCurrentState();
 
