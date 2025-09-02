@@ -105,7 +105,7 @@ void generateGenericPizza() {
     pizzas.push_back(Vegetarian);
 
     // --- Meat Lover ---
-    BasePizza* Meat_Lover = new BasePizza("Pepperoni", 0.0);
+    BasePizza* Meat_Lover = new BasePizza("Meat Lover", 0.0);
     ToppingGroup* m_Lover = new ToppingGroup("", 0.0);
     m_Lover->add(new Topping("Pepperoni", 20.00));
     Meat_Lover->addToToppings(m_Lover);
@@ -117,7 +117,7 @@ void generateGenericPizza() {
     pizzas.push_back(Meat_Lover);
 
     // --- Vegetarian Deluxe ---
-    BasePizza* Veg_del = new BasePizza("Vegetarian", 0.0);
+    BasePizza* Veg_del = new BasePizza("Vegetarian Deluxe", 0.0);
     ToppingGroup* vegDel = new ToppingGroup("", 0.0);
     vegDel->add(new Topping("Onions", 8.00));
     vegDel->add(new Topping("Green Peppers", 10.00));
