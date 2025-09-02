@@ -8,7 +8,7 @@
 
 class PizzaOrder{
     public:
-        PizzaOrder(){};
+        PizzaOrder():strategy(new RegularPrice()){};
         double useAlgorithm(Pizza* pizza){
             return strategy->applyDiscount(pizza);
         };
@@ -17,8 +17,7 @@ class PizzaOrder{
         void regularStrategy();
         ~PizzaOrder(){delete strategy;}
     private:
-        DiscountStrategy* strategy = new RegularPrice();
-
+        DiscountStrategy* strategy;
 };
 
 #endif

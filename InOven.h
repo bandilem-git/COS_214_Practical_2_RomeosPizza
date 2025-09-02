@@ -8,7 +8,7 @@ class InOven: public PizzaState{
     public:
         InOven();
         ~InOven(){}
-        void handle(PizzaStateContext* c);
+        void handle(PizzaStateContext* c) override
 };
 
 #endif

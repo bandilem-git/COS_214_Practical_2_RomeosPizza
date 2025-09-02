@@ -8,9 +8,9 @@ class Plated : public PizzaState{
 public:
     Plated();
     ~Plated(){};
-    void handle(PizzaStateContext *c);
+    void handle(PizzaStateContext *c) override;
     void backToOven(){ oven = true; }
-    void reversePlate();
+    void reversePlate() override;
 
 private:
     bool oven = false;

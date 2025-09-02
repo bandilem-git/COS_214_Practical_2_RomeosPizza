@@ -7,8 +7,8 @@
 class RegularPrice : public DiscountStrategy
 {
 public:
-    double applyDiscount(Pizza *pizza);
-    double getDiscount() { return discount; }
+    double applyDiscount(Pizza *pizza) override;
+    double getDiscount() override { return discount; }
 
 private:
     double discount = 0.0;

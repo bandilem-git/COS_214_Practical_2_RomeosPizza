@@ -17,7 +17,6 @@ public:
     std::string getName() override;
     double getPrice() override;
     bool isEmpty();
-    void print();
     
     ~ToppingGroup();
 };
