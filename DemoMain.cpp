@@ -1,44 +1,44 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include "BasePizza.h"
-#include "Customer.h"
-#include "Decker.h"
-#include "Ordered.h"
-#include "SpecialsMenu.h"
-#include "StuffedCrust.h"
-#include "ExtraCheese.h"
-#include "Topping.h"
-#include "ToppingGroup.h"
-#include "PizzaOrder.h"
-#include "RegularPrice.h"
-#include "BulkDiscount.h"
-#include "FamilyDiscount.h"
-#include "PizzaStateContext.h"
-#include "PizzaMenu.h"
-#include "Observer.h"
-#include "Website.h"
+// #include <iostream>
+// #include <vector>
+// #include <string>
+// #include "BasePizza.h"
+// #include "Customer.h"
+// #include "Decker.h"
+// #include "Ordered.h"
+// #include "SpecialsMenu.h"
+// #include "StuffedCrust.h"
+// #include "ExtraCheese.h"
+// #include "Topping.h"
+// #include "ToppingGroup.h"
+// #include "PizzaOrder.h"
+// #include "PizzaStateContext.h"
+// #include "PizzaMenu.h"
+// #include "Observer.h"
+// #include "Website.h"
 
+// std::vector<Pizza *> pizzas; // global list of pizzas
+// Menus *mainMenu = new PizzaMenu();
+// Menus *specials = new SpecialsMenu();
+// Observer *customer1 = new Customer();
+// Observer *customer2 = new Website();
 
-// std::vector<Pizza*> pizzas;   // global list of pizzas
-// Menus* mainMenu = new PizzaMenu();
-// Menus* specials = new SpecialsMenu();
-// Observer* customer1 = new Customer();
-// Observer* customer2 = new Website();
-
-// void listPizzas() {
-//     if (pizzas.empty()) {
+// void listPizzas()
+// {
+//     if (pizzas.empty())
+//     {
 //         std::cout << "No pizzas created yet.\n";
 //         return;
 //     }
 //     std::cout << "\n=== Current Pizzas ===\n";
-//     for (auto& p : pizzas) {
+//     for (auto &p : pizzas)
+//     {
 //         p->printPizza();
 //         std::cout << " (R" << p->getPrice() << ")\n";
 //     }
 // }
 
-// void createPizza() {
+// void createPizza()
+// {
 //     std::string name;
 //     double basePrice;
 //     std::cout << "Enter pizza name: ";
@@ -47,13 +47,15 @@
 //     std::cout << "Enter base price: ";
 //     std::cin >> basePrice;
 
-//     Pizza* newPizza = new BasePizza(name, basePrice);
+//     Pizza *newPizza = new BasePizza(name, basePrice);
 
 //     int addTopping;
-//     do {
+//     do
+//     {
 //         std::cout << "Add a topping? (1=Yes, 0=No): ";
 //         std::cin >> addTopping;
-//         if (addTopping == 1) {
+//         if (addTopping == 1)
+//         {
 //             std::string tName;
 //             double tPrice;
 //             std::cout << "Topping name: ";
@@ -67,15 +69,21 @@
 
 //     // Let user decorate the pizza
 //     int decorateChoice;
-//     do {
+//     do
+//     {
 //         std::cout << "Add decoration? (1=Extra Cheese, 2=Stuffed Crust, 3=Decker, 0=None): ";
 //         std::cin >> decorateChoice;
 
-//         if (decorateChoice == 1) {
+//         if (decorateChoice == 1)
+//         {
 //             newPizza = new ExtraCheese(newPizza);
-//         } else if (decorateChoice == 2) {
+//         }
+//         else if (decorateChoice == 2)
+//         {
 //             newPizza = new StuffedCrust(newPizza);
-//         } else if (decorateChoice == 3) {
+//         }
+//         else if (decorateChoice == 3)
+//         {
 //             newPizza = new Decker(newPizza);
 //         }
 //     } while (decorateChoice != 0);
@@ -87,17 +95,18 @@
 //     std::cout << "Final price: R" << newPizza->getPrice() << "\n";
 // }
 
-// void generateGenericPizza() {
+// void generateGenericPizza()
+// {
 //     // --- Pepperoni ---
-//     BasePizza* Pepperoni = new BasePizza("Pepperoni", 0.0);
-//     ToppingGroup* pep = new ToppingGroup("", 0.0);
+//     BasePizza *Pepperoni = new BasePizza("Pepperoni", 0.0);
+//     ToppingGroup *pep = new ToppingGroup("", 0.0);
 //     pep->add(new Topping("Pepperoni", 20.00));
 //     Pepperoni->addToToppings(pep);
 //     pizzas.push_back(Pepperoni);
 
 //     // --- Vegetarian ---
-//     BasePizza* Vegetarian = new BasePizza("Vegetarian", 0.0);
-//     ToppingGroup* veg = new ToppingGroup("", 0.0);
+//     BasePizza *Vegetarian = new BasePizza("Vegetarian", 0.0);
+//     ToppingGroup *veg = new ToppingGroup("", 0.0);
 //     veg->add(new Topping("Onions", 20.00));
 //     veg->add(new Topping("Green Peppers", 20.00));
 //     veg->add(new Topping("Mushrooms", 20.00));
@@ -105,89 +114,110 @@
 //     pizzas.push_back(Vegetarian);
 
 //     // --- Meat Lover ---
-//     BasePizza* Meat_Lover = new BasePizza("Meat Lover", 0.0);
-//     ToppingGroup* m_Lover = new ToppingGroup("", 0.0);
+//     BasePizza *Meat_Lover = new BasePizza("Meat Lover", 0.0);
+//     ToppingGroup *m_Lover = new ToppingGroup("", 0.0);
 //     m_Lover->add(new Topping("Pepperoni", 20.00));
 //     Meat_Lover->addToToppings(m_Lover);
-//     ToppingGroup* m_Lover_prep = new ToppingGroup("Meat Lover", 0.0);
+//     ToppingGroup *m_Lover_prep = new ToppingGroup("Meat Lover", 0.0);
 //     m_Lover_prep->add(new Topping("Beef Sausage", 25.00));
 //     m_Lover_prep->add(new Topping("Salami", 22.00));
 //     Meat_Lover->addToToppings(m_Lover_prep);
 
 //     pizzas.push_back(Meat_Lover);
 
-    // --- Vegetarian Deluxe ---
-    BasePizza* Veg_del = new BasePizza("Vegetarian Deluxe", 0.0);
-    ToppingGroup* vegDel = new ToppingGroup("", 0.0);
-    vegDel->add(new Topping("Onions", 8.00));
-    vegDel->add(new Topping("Green Peppers", 10.00));
-    vegDel->add(new Topping("Mushrooms", 12.00));
-    Veg_del->addToToppings(vegDel);
-    ToppingGroup* official_veg_del = new ToppingGroup("Vegetarian Deluxe", 0.0);
-    official_veg_del->add(new Topping("Feta Cheese", 18.00));
-    official_veg_del->add(new Topping("Olives", 15.00));
-    Veg_del->addToToppings(official_veg_del);
-    pizzas.push_back(Veg_del);
-}
+//     // --- Vegetarian Deluxe ---
+//     BasePizza *Veg_del = new BasePizza("Vegetarian Deluxe", 0.0);
+//     ToppingGroup *vegDel = new ToppingGroup("", 0.0);
+//     vegDel->add(new Topping("Onions", 8.00));
+//     vegDel->add(new Topping("Green Peppers", 10.00));
+//     vegDel->add(new Topping("Mushrooms", 12.00));
+//     Veg_del->addToToppings(vegDel);
+//     ToppingGroup *official_veg_del = new ToppingGroup("Vegetarian Deluxe", 0.0);
+//     official_veg_del->add(new Topping("Feta Cheese", 18.00));
+//     official_veg_del->add(new Topping("Olives", 15.00));
+//     Veg_del->addToToppings(official_veg_del);
+//     pizzas.push_back(Veg_del);
+// }
 
+// void applyDiscount()
+// {
+//     if (pizzas.empty())
+//     {
+//         std::cout << "No pizzas available.\n";
+//         return;
+//     }
 
-void applyDiscount() {
-    if (pizzas.empty()) {
-        std::cout << "No pizzas available.\n";
-        return;
-    }
-    std::cout << "Choose discount: (1) Family (2) Bulk (3) Regular: ";
-    int choice;
-    std::cin >> choice;
+//     PizzaOrder *order = new PizzaOrder();
 
-    DiscountStrategy* strategy = nullptr;
-    if (choice == 1) strategy = new FamilyDiscount();
-    else if (choice == 2) strategy = new BulkDiscount();
-    else strategy = new RegularPrice();
+//     // RegularPrice
+//     order->regularStrategy();
+//     std::cout << "\n=== Regular Price ===\n";
+//     for (auto &p : pizzas)
+//     {
+//         std::cout << "[Strategy] RegularPrice: "
+//                   << p->getName() << ": R"
+//                   << order->useAlgorithm(p) << "\n";
+//     }
 
-    PizzaOrder* order = new PizzaOrder(strategy);
+//     // BulkDiscount
+//     order->bulkStrategy();
+//     std::cout << "\n=== Bulk Discount ===\n";
+//     for (auto &p : pizzas)
+//     {
+//         std::cout << "[Strategy] BulkDiscount: "
+//                   << p->getName() << ": R"
+//                   << order->useAlgorithm(p) << "\n";
+//     }
 
-    std::cout << "\n=== Discounted Prices ===\n";
-    for (auto& p : pizzas) {
-        cout << p->getName()<< " original Price: R"<<p->getPrice()<< endl;
-        double price = order->useAlgorithm(p);
-        std::cout << p->getName() << " discounted price: R" << price << "\n";
-    }
+//     // FamilyDiscount
+//     order->familyStrategy();
+//     std::cout << "\n=== Family Discount ===\n";
+//     for (auto &p : pizzas)
+//     {
+//         std::cout << "[Strategy] FamilyDiscount: "
+//                   << p->getName() << ": R"
+//                   << order->useAlgorithm(p) << "\n";
+//     }
 
-    delete order;  // cleans strategy internally
-}
+//     delete order;
+// }
 
-// void simulateState() {
-//     if (pizzas.empty()) {
+// void simulateState()
+// {
+//     if (pizzas.empty())
+//     {
 //         std::cout << "Create a pizza first!\n";
 //         return;
 //     }
 
-//     Pizza* target = pizzas.back(); // last created pizza
-//     PizzaStateContext* context = new PizzaStateContext(target);
+//     Pizza *target = pizzas.back(); // last created pizza
+//     PizzaStateContext *context = new PizzaStateContext(target);
 
 //     context->setState(new Ordered());
 //     context->displayCurrentState();
 
-//     context->request();  // InOven
+//     context->request(); // InOven
 //     context->displayCurrentState();
 
-//     context->request();  // Plated
+//     context->request(); // Plated
 //     context->displayCurrentState();
 
-//     context->request();  // Boxed
+//     context->request(); // Boxed
 //     context->displayCurrentState();
 
 //     delete context;
 // }
 
-// void notifyCustomers() {
+// void notifyCustomers()
+// {
 //     mainMenu->notifyObservers("New pizza update available!");
 //     specials->notifyObservers("Specials updated!");
 // }
 
-// void cleanup() {
-//     for (auto pizza : pizzas) {
+// void cleanup()
+// {
+//     for (auto pizza : pizzas)
+//     {
 //         delete pizza; // finally delete the pizza
 //     }
 //     pizzas.clear();
@@ -198,15 +228,16 @@ void applyDiscount() {
 //     delete customer2;
 // }
 
-
-// int main() {
+// int main()
+// {
 //     mainMenu->addObserver(customer1);
 //     mainMenu->addObserver(customer2);
 //     specials->addObserver(customer1);
 //     specials->addObserver(customer2);
 //     generateGenericPizza();
 //     int choice;
-//     do {
+//     do
+//     {
 //         std::cout << "\n=== Romeo's Pizza Admin Menu ===\n";
 //         std::cout << "1. List Pizzas\n";
 //         std::cout << "2. Create Pizza\n";
@@ -217,14 +248,28 @@ void applyDiscount() {
 //         std::cout << "Choice: ";
 //         std::cin >> choice;
 
-//         switch (choice) {
-//             case 1: listPizzas(); break;
-//             case 2: createPizza(); break;
-//             case 3: applyDiscount(); break;
-//             case 4: simulateState(); break;
-//             case 5: notifyCustomers(); break;
-//             case 0: std::cout << "Exiting...\n"; break;
-//             default: std::cout << "Invalid choice.\n";
+//         switch (choice)
+//         {
+//         case 1:
+//             listPizzas();
+//             break;
+//         case 2:
+//             createPizza();
+//             break;
+//         case 3:
+//             applyDiscount();
+//             break;
+//         case 4:
+//             simulateState();
+//             break;
+//         case 5:
+//             notifyCustomers();
+//             break;
+//         case 0:
+//             std::cout << "Exiting...\n";
+//             break;
+//         default:
+//             std::cout << "Invalid choice.\n";
 //         }
 //     } while (choice != 0);
 
